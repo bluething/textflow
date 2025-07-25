@@ -138,8 +138,8 @@ class HtmlContentExtractorTest {
         @Test
         @DisplayName("Should prefer MIME type over file extension")
         void shouldPreferMimeTypeOverFileExtension() {
-            // Given - Stubbing needed since we're testing MIME type precedence over extension
-            when(mockPath.getFileName()).thenReturn(Path.of("test.html"));
+            // Given - No stubbing needed since unsupported MIME type goes to default case
+            // The test demonstrates that MIME type takes precedence by never checking filename
 
             // When
             boolean result = extractor.canHandle(mockPath, "text/plain");
