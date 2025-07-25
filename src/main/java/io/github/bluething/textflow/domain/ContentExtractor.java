@@ -10,9 +10,9 @@ import java.nio.file.Path;
  */
 public interface ContentExtractor {
     /**
-     * Checks if this extractor can handle the given file.
+     * Checks if this extractor can handle the given file using content-based detection.
      */
-    boolean canHandle(Path filePath);
+    boolean canHandle(Path filePath, String detectedMimeType);
 
     /**
      * Extracts text content from the file.
