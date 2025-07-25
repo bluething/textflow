@@ -1,7 +1,22 @@
 package io.github.bluething.textflow.domain;
 
-public record TextContent(String content, String originalFileName, String fileType) {
-    public static TextContent of(String content, String fileName, String fileType) {
+public record TextContent(String content,
+                          String originalFileName,
+                          String fileType,
+                          String detectedMimeType,
+                          ContentMetadata metadata) {
+    /**
+     * Creates TextContent with validation.
+     */
+    public static TextContent of(String content, String fileName, String fileType, String mimeType) {
+        return of(content, fileName, fileType, mimeType, ContentMetadata.empty());
+    }
+
+    /**
+     * Creates TextContent with metadata.
+     */
+    public static TextContent of(String content, String fileName, String fileType,
+                                 String mimeType, ContentMetadata metadata) {
         if (content == null) {
             throw new IllegalArgumentException("Content cannot be null");
         }
@@ -12,7 +27,8 @@ public record TextContent(String content, String originalFileName, String fileTy
             throw new IllegalArgumentException("File type cannot be null or empty");
         }
 
-        return new TextContent(content, fileName, fileType);
+        return new TextContent(content, fileName, fileType,
+                mimeType != null ? mimeType : "unknown", metadata);
     }
 
     /**

@@ -2,6 +2,7 @@ package io.github.bluething.textflow.domain;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Set;
 
 /**
  * Strategy interface for extracting text content from different file formats.
@@ -17,10 +18,15 @@ public interface ContentExtractor {
     /**
      * Extracts text content from the file.
      */
-    TextContent extract(Path filePath) throws IOException;
+    TextContent extract(Path filePath, String detectedMimeType) throws IOException;
 
     /**
      * Gets the file type identifier for this extractor.
      */
     String getFileType();
+
+    /**
+     * MIME type support for content-based detection
+     * */
+    Set<String> getSupportedMimeTypes();
 }
