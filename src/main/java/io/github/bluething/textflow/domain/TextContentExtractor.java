@@ -17,7 +17,14 @@ class TextContentExtractor implements ContentExtractor {
 
     @Override
     public boolean canHandle(Path filePath, String detectedMimeType) {
-        return false;
+        return switch (detectedMimeType) {
+            case String mime when SUPPORTED_MIME_TYPES.contains(mime) -> true;
+            case null -> {
+                String fileName = filePath.getFileName().toString().toLowerCase();
+                yield fileName.endsWith(".txt") || fileName.endsWith(".log");
+            }
+            default -> false;
+        };
     }
 
     @Override
