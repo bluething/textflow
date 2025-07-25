@@ -1,6 +1,5 @@
 package io.github.bluething.textflow.domain;
 
-import io.github.bluething.textflow.TestFileUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
